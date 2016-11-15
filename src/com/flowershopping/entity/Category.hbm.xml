@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-9-6 20:01:04 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.flowershopping.entity.Category" table="category" catalog="db_flower">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="categoryName" type="string">
+            <column name="categoryName" length="30" not-null="true" />
+        </property>
+        <set name="goodses" table="goods" inverse="true" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="categoryId" not-null="true" />
+            </key>
+            <one-to-many class="com.flowershopping.entity.Goods" />
+        </set>
+    </class>
+</hibernate-mapping>

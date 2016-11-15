@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-9-6 20:01:04 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.flowershopping.entity.Users" table="users" catalog="db_flower">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="userName" type="string">
+            <column name="userName" length="30" not-null="true" unique="true" />
+        </property>
+        <property name="realName" type="string">
+            <column name="realName" length="30" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="30" not-null="true" />
+        </property>
+        <property name="pwdQuestion" type="string">
+            <column name="pwdQuestion" length="50" />
+        </property>
+        <property name="pwdQuestionAnswer" type="string">
+            <column name="pwdQuestionAnswer" length="50" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="50" />
+        </property>
+        <property name="phoneNo" type="string">
+            <column name="phoneNO" length="30" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

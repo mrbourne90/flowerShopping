@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC 
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<!-- 配置根元素 -->
+<struts>
+	<!--使用spring创建管理struts2的action操作 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 设置struts2的编码为UTF8 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<!-- 不使用浏览器缓存 -->
+	<constant name="struts.serve.static.browserCache" value="false"></constant>
+	<!-- 每次重新加载xml配置文件 -->
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+	<!-- 启用开发者模式 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 不使用struts2提供的主题ui -->
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<!-- 提供对通配符的支持 -->
+	<constant name="strutsenableDynamicMethodInvocation" value="true" />
+
+	<!-- 需要拦截未登录用户的包 -->
+	<package name="login" namespace="/" extends="struts-default">
+		<!-- 配置拦截未登录用户的拦截器 -->
+		<interceptors>
+			<interceptor name="userInter"
+				class="com.flowershopping.tool.UserInterceptor"></interceptor>
+			<interceptor-stack name="userStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="userInter"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 需要拦截的action 注销 和 提交订单 -->
+		<!-- 设置默认拦截器 -->
+		<default-interceptor-ref name="userStack"></default-interceptor-ref>
+		<!-- 拦截结果处理 -->
+		<global-results>
+			<result name="login" type="redirect">/login/login.jsp</result>
+		</global-results>
+		<!-- 注销 -->
+		<action name="logout" class="userAction" method="logout">
+			<result name="success">/index/index.jsp</result>
+		</action>
+		<!-- 提交订单 -->
+		<action name="addOrder" class="ordersAction" method="addOrder">
+			<result name="success">/shopping/orderAdded.jsp</result>
+		</action>
+	</package>
+
+	<!-- 需要进行未登录管理员拦截的包 -->
+
+	<package name="admin" namespace="/" extends="struts-default">
+		<!-- 配置拦截未登录管理员的拦截器 -->
+		<interceptors>
+			<interceptor name="adminInter"
+				class="com.flowershopping.tool.AdminInterceptor"></interceptor>
+			<interceptor-stack name="adminStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="adminInter"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 需要拦截的action 查看所有用户 查看订单 添加商品 -->
+		<!-- 设置默认拦截器 -->
+		<default-interceptor-ref name="adminStack"></default-interceptor-ref>
+		<!-- 拦截结果处理 -->
+		<global-results>
+			<result name="login" type="redirect">/login/admin.jsp</result>
+		</global-results>
+		<!-- 查看所有用户 -->
+		<action name="findAllUsers" class="userAction" method="findAllUsers">
+			<result name="success">/admin/manageUsers.jsp</result>
+		</action>
+		<!-- 查看订单 -->
+		<action name="findAllOrders" class="ordersAction" method="findAllOrders">
+			<result name="success">/admin/manageOrders.jsp</result>
+		</action>
+		<!-- 添加商品 -->
+		<action name="addGoods" class="goodsAction" method="addGoods">
+		</action>
+	</package>
+	<!-- 其余包 -->
+	<package name="default" namespace="/" extends="struts-default,json-default"
+		strict-method-invocation="false">
+		<global-results>
+			<result name="jsonMap" type="json">
+				<param name="root">pageMap</param>
+			</result>
+			<result name="stream" type="stream">
+				<param name="inputName">inputStream</param>
+			</result>
+		</global-results>
+		<!-- 商品分类 -->
+		<action name="category_*" class="categoryAction" method="{1}">
+			<result name="findCategories_success">/index/header.jsp</result>
+		</action>
+		<!-- 商品信息 -->
+		<action name="goods_*" class="goodsAction" method="{1}">
+			<result name="findGoodsByCategory_success">/index/contentByCategory.jsp</result>
+			<result name="findAllGoods_success">/index/content.jsp</result>
+			<result name="findOne_success">/shopping/product.jsp</result>
+			<result name="findGoodsByKey_success">/shopping/searchResult.jsp</result>
+			<result name="findGoodsByKeys_success">/shopping/searchResult.jsp</result>
+		</action>
+		<!-- 用户 -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="checkUser_success">/index/index.jsp</result>
+			<result name="checkUser_error">/login/login.jsp</result>
+			<result name="checkAdmin_success">/admin/main.jsp</result>
+			<result name="checkAdmin_error">/login/admin.jsp</result>
+			<result name="addUser_success">/index/index.jsp</result>
+			<result name="updateUser_success">/login/userinfocenter.jsp</result>
+		</action>
+		<!-- 订单 -->
+		<action name="orders_*" class="ordersAction" method="{1}">
+			<result name="addToCart_success">/shopping/showCart.jsp</result>
+			<result name="updateCart_error">/shopping/showCartErro.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-9-6 20:01:04 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.flowershopping.entity.Orders" table="orders" catalog="db_flower">
+        <id name="ordersId" type="java.lang.Integer">
+            <column name="ordersId" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="30" not-null="true" />
+        </property>
+        <property name="num" type="int">
+            <column name="num" not-null="true" />
+        </property>
+        <property name="sum" type="big_decimal">
+            <column name="sum" precision="10" not-null="true" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="createTime" length="19" not-null="true" />
+        </property>
+        <set name="ordersdetailses" table="ordersdetails" inverse="true" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="ordersId" not-null="true" />
+            </key>
+            <one-to-many class="com.flowershopping.entity.Ordersdetails" />
+        </set>
+    </class>
+</hibernate-mapping>
