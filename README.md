@@ -8,5 +8,7 @@
 
 ## 网站预览
 
-### 
+### 首页
+
+![](https://github.com/mrbourne90/flowerShopping/raw/master/index.png)  
 
