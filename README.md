@@ -26,7 +26,7 @@
 
 ### 商品详情
 
-![](https://github.com/mrbourne90/flowerShopping/raw/master/goodsDetail.png) 
+![](https://github.com/mrbourne90/flowerShopping/raw/master/goodsdetail.png) 
 
 ### 购物车
 
