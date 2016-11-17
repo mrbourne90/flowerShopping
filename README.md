@@ -12,3 +12,26 @@
 
 ![](https://github.com/mrbourne90/flowerShopping/raw/master/index.png)  
 
+### 用户登录
+
+![](https://github.com/mrbourne90/flowerShopping/raw/master/login.png) 
+
+### 用户注册
+
+![](https://github.com/mrbourne90/flowerShopping/raw/master/register.png) 
+
+### 商品检索
+
+![](https://github.com/mrbourne90/flowerShopping/raw/master/searchResult.png) 
+
+### 商品详情
+
+![](https://github.com/mrbourne90/flowerShopping/raw/master/goodsDetail.png) 
+
+### 购物车
+
+![](https://github.com/mrbourne90/flowerShopping/raw/master/cart.png) 
+
+### 后台管理
+
+![](https://github.com/mrbourne90/flowerShopping/raw/master/goodsManage.png) 
